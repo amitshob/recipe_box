@@ -1,0 +1,25 @@
+<h1 style="text-align: center; margin-bottom: 50px;">Question<i class="fa fa-tasks"></i></h1>
+
+
+<p>Recipe List:</p>
+
+
+<p><i>Add Recipe:</i></p>
+
+<form action="/recipes" method="post">
+  <label for="name">Name:</label>
+  <input id="name" name="name" type="text">
+
+  <button type="submit" class="btn btn-success">Add Recipe</button>
+</form>
+
+<ul>
+<% if @recipes.any?() %>
+  <% @recipes.each() do |recipe| %>
+  <li><a href="/recipes/<%= recipe.id %>"><%= recipe.name() %></a></li>
+  <% end %>
+<% end %>
+</ul>
+
+<!-- for testing -->
+<a href="/recipe_link"> RECIPES </a>

@@ -1,0 +1,36 @@
+<p>You are viewing <%= @selected_recipe.name %></p>
+
+<div id= "ingredients_group">
+  <p><i>Add Ingredients:</i></p>
+
+  <form action="/add_ingredient" method="post">
+    <input type="hidden" name="id" value="<%= @selected_recipe.id()%>">
+    <!--
+    holds the value value in the page but doesnot show it on the page
+  -->
+    <label for="ingredient">Ingredient Name:</label>
+    <input id="ingredient" name="ingredient" type="text">
+
+    <button type="submit" class="btn btn-success">Add Recipe</button>
+  </form>
+
+  <ul>
+
+  </ul>
+</div>
+
+<div id= "instructions_group">
+  <p> Instructions: </p>
+
+  <form action="/" method="post">
+    <label for="instruction">Instruction:</label>
+    <input type="hidden" name="id" value="<%= @selected_recipe.id()%>">
+    <input id="instruction" name="instruction" type="text">
+
+    <button type="submit" class="btn btn-success">Add Instruction</button>
+  </form>
+
+  <ol>
+
+  </ol>
+</div>
