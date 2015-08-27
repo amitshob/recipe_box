@@ -1,5 +1,26 @@
 <p>You are viewing <%= @selected_recipe.name %></p>
 
+<div id="ratings_group">
+  <% if @selected_recipe.rating %>
+  <p> THIS IS THE RATING: <%= @selected_recipe.rating %> </p>
+  <% else %>
+  <p>Rate It</p>
+  <form action="/add_ratings" method="post">
+    <input type="hidden" name="id" value="<%= @selected_recipe.id()%>">
+    <input type="radio" name="rating" value="1">*
+    <br>
+    <input type="radio" name="rating" value="2">**
+    <br>
+    <input type="radio" name="rating" value="3">***
+    <br>
+    <input type="radio" name="rating" value="4">****
+    <br>
+    <input type="radio" name="rating" value="5">*****
+
+    <button type="submit" class="btn btn-sucess">Add Rating</button>
+  </form>
+</div>
+  <% end %>
 <div id= "ingredients_group">
   <p><i>Add Ingredients:</i></p>
 
@@ -15,14 +36,18 @@
   </form>
 
   <ul>
-
+    <% if @selected_recipe.ingredients.any?() %>
+      <% @selected_recipe.ingredients.each() do |ingredients| %>
+       <li><%= ingredients.name() %></li>
+      <% end %>
+    <% end %>
   </ul>
 </div>
 
 <div id= "instructions_group">
   <p> Instructions: </p>
 
-  <form action="/" method="post">
+  <form action="/add_instruction" method="post">
     <label for="instruction">Instruction:</label>
     <input type="hidden" name="id" value="<%= @selected_recipe.id()%>">
     <input id="instruction" name="instruction" type="text">
@@ -31,6 +56,30 @@
   </form>
 
   <ol>
-
+    <% if @selected_recipe.instructions.any?() %>
+      <% @selected_recipe.instructions.each() do |instruction| %>
+        <li><%= instruction.description() %></li>
+      <% end %>
+    <% end %>
   </ol>
 </div>
+
+<div id= "tags_group">
+  <p> Tags: </p>
+
+  <% if @selected_recipe.tags.any? %>
+    <% @selected_recipe.tags.each() do |tag| %>
+      <li> <%= tag.name() %> </li>
+    <% end %>
+  <% else %>
+    <form action="/tag_associate" method = "post">
+      <input type="hidden" name="id" value="<%= @selected_recipe.id()%>"
+      <% @tags.each do |tag| %>
+        <input type="checkbox" name="tag_checkbox[]" value="<%= tag.id() %>"><%= tag.name %>
+      <% end %>
+      <button name="button">Associate</button>
+    </form>
+  <% end %>
+
+</div>
+ <a href="/">Home</a>

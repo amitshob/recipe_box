@@ -12,3 +12,10 @@
     #     <li><%= instruction.name() %></li>
     #   <% end %>
     # <% end %>
+
+    #
+    # <% if @selected_recipes.any?() %>
+    #   <% @selected_recipes.each() do |recipe| %>
+    #   <li><a href="/recipes/<%= recipe.id %>"><%= tag.name() %></a></li>
+    #   <% end %>
+    # <% end %>

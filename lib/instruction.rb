@@ -1,5 +1,3 @@
-class Instruction < Array
-  define_method(:initialize) do
-    @instructions_list = []
-  end
+class Instruction < ActiveRecord::Base
+  belongs_to(:recipe)
 end

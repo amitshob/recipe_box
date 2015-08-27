@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150826174824) do
+ActiveRecord::Schema.define(version: 20150827190622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,9 +23,36 @@ ActiveRecord::Schema.define(version: 20150826174824) do
     t.datetime "updated_at"
   end
 
+  create_table "ingredients_recipes", force: :cascade do |t|
+    t.integer  "ingredient_id"
+    t.integer  "recipe_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "instructions", force: :cascade do |t|
+    t.string   "description"
+    t.integer  "recipe_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "recipes", force: :cascade do |t|
     t.string  "name"
     t.integer "rating"
+  end
+
+  create_table "recipes_tags", force: :cascade do |t|
+    t.integer  "recipe_id"
+    t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
